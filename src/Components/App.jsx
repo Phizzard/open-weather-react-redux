@@ -1,10 +1,12 @@
 import React from "react";
 import WeatherSummary from "./WeatherSummary";
+import RefreshWeather from "./RefreshWeather";
 
 function App() {
   return (
-    <div className="App flex justify-center">
+    <div className="App">
       <WeatherSummary />
+      <RefreshWeather />
     </div>
   );
 }

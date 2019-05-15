@@ -20,25 +20,27 @@ const WeatherSummary = ({ fetchWeather, weather }) => {
   }, [fetchWeather]);
 
   return (
-    <Card>
-      <CardTitle>Current Weather</CardTitle>
-      <CardSubTitle>{weather.name}</CardSubTitle>
-      <WiCloud className="m-auto text-6xl" />
-      {weather.main && (
-        <div>
-          <p className="text-3xl pb-4">
-            {kelvinToCelsius(weather.main.temp).toFixed(1)}&deg;C
-          </p>
-          <p className="text-xs">
-            {kelvinToCelsius(weather.main.temp_min).toFixed(1)}&deg;C /{" "}
-            {kelvinToCelsius(weather.main.temp_max).toFixed(1)}&deg;C
-          </p>
-        </div>
-      )}
-      {weather.weather && weather.weather.length > 0 && (
-        <p className="text-xs">{weather.weather[0].main}</p>
-      )}
-    </Card>
+    <div className="flex justify-center content-center mt-6">
+      <Card>
+        <CardTitle>Current Weather</CardTitle>
+        <CardSubTitle>{weather.name}</CardSubTitle>
+        <WiCloud className="m-auto text-6xl" />
+        {weather.main && (
+          <div>
+            <p className="text-3xl pb-4">
+              {kelvinToCelsius(weather.main.temp).toFixed(1)}&deg;C
+            </p>
+            <p className="text-xs">
+              {kelvinToCelsius(weather.main.temp_min).toFixed(1)}&deg;C /{" "}
+              {kelvinToCelsius(weather.main.temp_max).toFixed(1)}&deg;C
+            </p>
+          </div>
+        )}
+        {weather.weather && weather.weather.length > 0 && (
+          <p className="text-xs">{weather.weather[0].main}</p>
+        )}
+      </Card>
+    </div>
   );
 };
 

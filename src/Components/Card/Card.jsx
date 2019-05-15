@@ -1,9 +1,13 @@
 import React from "react";
 
-const Card = ({ children }) => (
-  <div className="max-w-sm shadow-lg rounded-lg text-center p-3">
+const Card = ({ children, className }) => (
+  <div className={`shadow-lg rounded-lg text-center p-3 ${className}`}>
     {children}
   </div>
 );
+
+Card.defaultProps = {
+  className: ""
+};
 
 export default Card;
