@@ -39,6 +39,9 @@ const WeatherSummary = ({ fetchCurrentWeather, data }) => {
             ? data.weather[0].main
             : "Unknown"
         }
+        icon={
+          data.weather && data.weather.length > 0 ? data.weather[0].icon : null
+        }
         lastUpdated={distanceInWords(data.lastUpdated, now, {
           includeSeconds: true
         })}

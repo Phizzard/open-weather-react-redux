@@ -1,5 +1,4 @@
 import React from "react";
-import { WiCloud } from "react-icons/wi";
 import { Card, CardTitle, CardSubTitle } from "./Card/";
 
 const WeatherCard = ({
@@ -9,12 +8,19 @@ const WeatherCard = ({
   minTemp,
   maxTemp,
   status,
+  icon,
   lastUpdated
 }) => (
   <Card>
     {title && <CardTitle>{title}</CardTitle>}
     {subTitle && <CardSubTitle>{subTitle}</CardSubTitle>}
-    <WiCloud className="m-auto text-6xl" />
+    {icon && (
+      <img
+        className="m-auto"
+        alt={status}
+        src={`http://openweathermap.org/img/w/${icon}.png`}
+      />
+    )}
     <div>
       <p className="text-3xl pb-4">{temp}&deg;C</p>
       <p className="text-xs">
