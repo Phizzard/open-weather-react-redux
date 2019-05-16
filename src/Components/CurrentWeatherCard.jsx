@@ -52,7 +52,7 @@ const WeatherSummary = ({ fetchCurrentWeather, data }) => {
 
 const mapStateToProps = state => {
   return {
-    data: state.weather
+    data: state.weather.current || {}
   };
 };
 

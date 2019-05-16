@@ -1,9 +1,15 @@
 export default (state = {}, action) => {
   switch (action.type) {
     case "FETCH_CURRENT_WEATHER":
-      return action.payload;
+      return {
+        ...state,
+        current: action.payload
+      };
     case "FETCH_FORECAST_WEATHER":
-      return action.payload;
+      return {
+        ...state,
+        forecast: action.payload
+      };
     default:
       return state;
   }

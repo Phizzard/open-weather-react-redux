@@ -9,9 +9,10 @@ const WeatherCard = ({
   maxTemp,
   status,
   icon,
-  lastUpdated
+  lastUpdated,
+  className
 }) => (
-  <Card>
+  <Card className={className}>
     {title && <CardTitle>{title}</CardTitle>}
     {subTitle && <CardSubTitle>{subTitle}</CardSubTitle>}
     {icon && (
@@ -38,8 +39,7 @@ WeatherCard.defaultProps = {
   temp: 0,
   minTemp: 0,
   maxTemp: 0,
-  status: "Unknown",
-  lastUpdated: "Just Now"
+  status: "Unknown"
 };
 
 export default WeatherCard;
