@@ -6,7 +6,7 @@ import toastr from "toastr";
 import { fetchCurrentWeather } from "../Actions/index";
 import Button from "./Button";
 
-const RefreshWeather = ({ fetchCurrentWeather }) => {
+const RefreshButton = ({ fetchCurrentWeather }) => {
   return (
     <div className="mt-6 flex justify-center">
       <Button
@@ -29,4 +29,4 @@ const RefreshWeather = ({ fetchCurrentWeather }) => {
 export default connect(
   null,
   { fetchCurrentWeather }
-)(RefreshWeather);
+)(RefreshButton);

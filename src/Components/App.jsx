@@ -1,12 +1,12 @@
 import React from "react";
-import WeatherSummary from "./WeatherSummary";
-import RefreshWeather from "./RefreshWeather";
+import CurrentWeatherCard from "./CurrentWeatherCard";
+import RefreshButton from "./RefreshButton";
 
 function App() {
   return (
     <div className="App">
-      <WeatherSummary />
-      <RefreshWeather />
+      <CurrentWeatherCard />
+      <RefreshButton />
     </div>
   );
 }
