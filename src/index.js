@@ -5,6 +5,7 @@ import { createStore, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
 
 import "./tailwind.css";
+import "toastr/build/toastr.min.css";
 import App from "./Components/App";
 import reducers from "./Reducers";
 

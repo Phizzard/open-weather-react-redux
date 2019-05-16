@@ -1,8 +1,9 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
-import { WiCloud } from "react-icons/wi";
-import { fetchWeather } from "../Actions";
-import { Card, CardTitle, CardSubTitle } from "./Card/";
+import useInterval from "use-interval";
+import { distanceInWords } from "date-fns";
+import { fetchCurrentWeather } from "../Actions";
+import WeatherCard from "./WeatherCard";
 
 const kelvinToCelsius = temp => {
   const CONVERSION_VALUE = 273.15;
@@ -10,47 +11,49 @@ const kelvinToCelsius = temp => {
   return temp - CONVERSION_VALUE;
 };
 
-const WeatherSummary = ({ fetchWeather, weather }) => {
+const WeatherSummary = ({ fetchCurrentWeather, data }) => {
+  const [now, setNow] = useState(new Date());
+
+  useInterval(() => {
+    setNow(new Date());
+  });
+
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(({ coords }) => {
       const { latitude, longitude } = coords;
 
-      fetchWeather(latitude, longitude);
+      fetchCurrentWeather(latitude, longitude);
     });
-  }, [fetchWeather]);
+  }, [fetchCurrentWeather]);
 
   return (
     <div className="flex justify-center content-center mt-6">
-      <Card>
-        <CardTitle>Current Weather</CardTitle>
-        <CardSubTitle>{weather.name}</CardSubTitle>
-        <WiCloud className="m-auto text-6xl" />
-        {weather.main && (
-          <div>
-            <p className="text-3xl pb-4">
-              {kelvinToCelsius(weather.main.temp).toFixed(1)}&deg;C
-            </p>
-            <p className="text-xs">
-              {kelvinToCelsius(weather.main.temp_min).toFixed(1)}&deg;C /{" "}
-              {kelvinToCelsius(weather.main.temp_max).toFixed(1)}&deg;C
-            </p>
-          </div>
-        )}
-        {weather.weather && weather.weather.length > 0 && (
-          <p className="text-xs">{weather.weather[0].main}</p>
-        )}
-      </Card>
+      <WeatherCard
+        title="CurrentWeather"
+        subTitle={data.name}
+        temp={data.main ? kelvinToCelsius(data.main.temp).toFixed(1) : 0}
+        minTemp={data.main ? kelvinToCelsius(data.main.temp_min).toFixed(1) : 0}
+        maxTemp={data.main ? kelvinToCelsius(data.main.temp_max).toFixed(1) : 0}
+        status={
+          data.weather && data.weather.length > 0
+            ? data.weather[0].main
+            : "Unknown"
+        }
+        lastUpdated={distanceInWords(data.lastUpdated, now, {
+          includeSeconds: true
+        })}
+      />
     </div>
   );
 };
 
 const mapStateToProps = state => {
   return {
-    weather: state.weather
+    data: state.weather
   };
 };
 
 export default connect(
   mapStateToProps,
-  { fetchWeather }
+  { fetchCurrentWeather }
 )(WeatherSummary);

@@ -1,14 +1,32 @@
 import React from "react";
 import { WiCloudRefresh } from "react-icons/wi";
+import { connect } from "react-redux";
+import toastr from "toastr";
 
+import { fetchCurrentWeather } from "../Actions/index";
 import Button from "./Button";
 
-const RefreshWeather = () => (
-  <div className="mt-6 flex justify-center">
-    <Button>
-      <WiCloudRefresh className="text-3xl" />
-    </Button>
-  </div>
-);
+const RefreshWeather = ({ fetchCurrentWeather }) => {
+  return (
+    <div className="mt-6 flex justify-center">
+      <Button
+        className="flex justify-center fixed bottom-0 w-full sm:w-auto sm:bottom-auto sm:top-0 sm:left-0 sm:mt-6 sm:ml-6"
+        onClick={() => {
+          navigator.geolocation.getCurrentPosition(({ coords }) => {
+            const { latitude, longitude } = coords;
 
-export default RefreshWeather;
+            fetchCurrentWeather(latitude, longitude);
+            toastr.success("Weather Status Refreshed");
+          });
+        }}
+      >
+        <WiCloudRefresh className="text-4xl pointer-events-none" />
+      </Button>
+    </div>
+  );
+};
+
+export default connect(
+  null,
+  { fetchCurrentWeather }
+)(RefreshWeather);
