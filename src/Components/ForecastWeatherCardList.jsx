@@ -29,14 +29,18 @@ const ForecastWeatherCardList = ({ fetchForecastWeather, data }) => {
             key={`day-${index}`}
             className="flex justify-start my-2 py-3 overflow-x-scroll"
           >
-            {day.map(time => {
+            {day.map((time, timeIndex) => {
               const date = format(new Date(time.dt_txt), "ddd Do MMM");
               const dateTime = format(new Date(time.dt_txt), "hh:mm A");
+
+              let colourCodePrefix = timeIndex + 4;
 
               return (
                 <WeatherCard
                   key={time.dt}
-                  className="mx-4 min-w-56"
+                  className={`mx-4 min-w-56 bg-indigo-${
+                    colourCodePrefix < 9 ? colourCodePrefix : 9
+                  }00`}
                   title={date}
                   subTitle={dateTime}
                   temp={kelvinToCelsius(time.main.temp).toFixed(1)}

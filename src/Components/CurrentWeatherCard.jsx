@@ -27,9 +27,10 @@ const WeatherSummary = ({ fetchCurrentWeather, data }) => {
   }, [fetchCurrentWeather]);
 
   return (
-    <div className="flex justify-center content-center mt-6">
+    <div className="flex justify-center content-center mt-6 ">
       <WeatherCard
         title="CurrentWeather"
+        className="bg-blue-600"
         subTitle={data.name}
         temp={data.main ? kelvinToCelsius(data.main.temp).toFixed(1) : 0}
         minTemp={data.main ? kelvinToCelsius(data.main.temp_min).toFixed(1) : 0}
