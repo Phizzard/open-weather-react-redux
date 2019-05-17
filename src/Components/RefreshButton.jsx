@@ -3,10 +3,10 @@ import { WiCloudRefresh } from "react-icons/wi";
 import { connect } from "react-redux";
 import toastr from "toastr";
 
-import { fetchCurrentWeather } from "../Actions/index";
+import { fetchCurrentWeather, fetchForecastWeather } from "../Actions/index";
 import Button from "./Button";
 
-const RefreshButton = ({ fetchCurrentWeather }) => {
+const RefreshButton = ({ fetchCurrentWeather, fetchForecastWeather }) => {
   return (
     <div className="mt-6 flex justify-center">
       <Button
@@ -16,6 +16,7 @@ const RefreshButton = ({ fetchCurrentWeather }) => {
             const { latitude, longitude } = coords;
 
             fetchCurrentWeather(latitude, longitude);
+            fetchForecastWeather(latitude, longitude);
             toastr.success("Weather Status Refreshed");
           });
         }}
@@ -28,5 +29,5 @@ const RefreshButton = ({ fetchCurrentWeather }) => {
 
 export default connect(
   null,
-  { fetchCurrentWeather }
+  { fetchCurrentWeather, fetchForecastWeather }
 )(RefreshButton);
